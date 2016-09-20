@@ -3,8 +3,8 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -20,7 +20,7 @@ local function history(extra, suc, result)
     send_msg(extra.chatid, '⛔️ The msgs is cleaned !', ok_cb, false)
   end
 end
-local function run(msg, matches)
+local function yagop(msg, matches)
   if matches[1] == 'clean' and is_sudo(msg) then
     if msg.to.type == 'channel' then
       if tonumber(matches[2]) > 1000000 or tonumber(matches[2]) < 1 then
@@ -39,5 +39,5 @@ return {
     patterns = {
         '^[!/#](clean) (%d*)$'
     },
-    run = run
+    run = yagop
 }
