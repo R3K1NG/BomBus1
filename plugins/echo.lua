@@ -1,6 +1,17 @@
-﻿
+--[[
+#
+#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#:((
+# For More Information ....! 
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
+# Version: 1.1
+#:))
+#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#
+]]
 
-local function run(msg, matches)
+local function yagop(msg, matches)
   local text = matches[1]
   local b = 1
 
@@ -17,6 +28,5 @@ return {
   patterns = {
     "^/echo +(.+)$"
   }, 
-  run = run 
+  run = yagop 
 }
--- arabic : @mohammedzedan
