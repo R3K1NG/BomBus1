@@ -3,15 +3,15 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #
 ]]
 do
-local Arian = 119626024 --put your id here(BOT OWNER ID)
+local Arian = 133362226 --put your id here(BOT OWNER ID)
 
 local function setrank(msg, name, value) -- setrank function
   local hash = nil
@@ -28,11 +28,11 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
   if result.username then
    Username = '@'..result.username
    else
-   Username = 'لايوجد'
+   Username = 'موجود نیست'
   end
-    local text = '› الاسم : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'› المعرف : '..Username..'\n'
-               ..'› الايدي : '..result.id..'\n\n'
+    local text = '› نام : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'› کاربر : '..Username..'\n'
+               ..'› آیدی : '..result.id..'\n\n'
 	local hash = 'whois:'..extra.chat2..':variables'
 	local value = redis:hget(hash, result.id)
     if not value then
@@ -67,11 +67,11 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
  if result.username then
    Username = '@'..result.username
    else
-   Username = 'لايوجد'
+   Username = 'موجودنیست'
  end
-    local text = '› الاسم : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'› المعرف : '..Username..'\n'
-               ..'› الايدي : '..result.id..'\n\n'
+    local text = '› نام : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'› کاربر : '..Username..'\n'
+               ..'› آیدی : '..result.id..'\n\n'
   local hash = 'whois:'..extra.chat2..':variables'
   local value = redis:hget(hash, result.id)
   if not value then
@@ -105,7 +105,7 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
 		if result.from.username then
 		   Username = '@'..result.from.username
 		   else
-		   Username = 'لايوجد'
+		   Username = 'موجودنیست'
 		 end
 		 
     local text = '♍️- name : '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
@@ -172,27 +172,27 @@ local function run(msg, matches)
   if msg.from.username then
    Username = '@'..msg.from.username
    else
-   Username = 'لايوجد'
+   Username = 'موجودنیست'
 end
-   local text = '♍️- First Name : '..(msg.from.first_name or 'لا يوجد ')..'\n'
-   local text = text..'♒️- Last Name : '..(msg.from.last_name or 'لا يوجد ')..'\n'	
+   local text = '♍️- First Name : '..(msg.from.first_name or 'موجود نیست ')..'\n'
+   local text = text..'♒️- Last Name : '..(msg.from.last_name or 'موجود نیست ')..'\n'	
    local text = text..'♑️- Username : '..Username..'\n'
    local text = text..'🆔- Your id : '..msg.from.id..'\n'
-  local text = text..'📲- phone : '..(msg.from.phone or 'لا يوجد ')..'\n'
+  local text = text..'📲- phone : '..(msg.from.phone or 'موجودنیست ')..'\n'
    local hash = 'rank:'..msg.to.id..':variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
 	  if not value then
 		if msg.from.id == tonumber(Arian) then
-		 text = text..'💟- Your : --انت مطور-- \n'
+		 text = text..'💟- Your : --توسعه دهنده-- \n'
 		elseif is_sudo(msg) then
-		 text = text..'💟- Your : --انت مطور-- \n'
+		 text = text..'💟- Your : --توسعه دهنده-- \n'
 		elseif is_owner(msg) then
-		 text = text..'💟- Your : --انت مشرف-- \n'
+		 text = text..'💟- Your : --شما اونری-- \n'
 		elseif is_momod(msg) then
-		 text = text..'💟- Your : --انت ادمن-- \n'
+		 text = text..'💟- Your : --شما ادمینی-- \n'
 		else
-		 text = text..'💟- Your : --انت عضو--\n'
+		 text = text..'💟- Your : --شما عضوی--\n'
 		end
 	  else
 	   text = text..'💡 whois : '..value..'\n'
@@ -205,8 +205,8 @@ end
 	 user_info_msgs = tonumber(redis:get(um_hash) or 0)
 	 text = text..'ℹ️- Msgs :'..user_info_msgs..'\n\n'
 	 if msg.to.type == 'chat' then
-	 text = text..'› اسم المجموعه : '..msg.to.title..'\n'
-     text = text..'› ايدي المجموعه : '..msg.to.id
+	 text = text..'› نام گروه : '..msg.to.title..'\n'
+     text = text..'› ايدي گروه : '..msg.to.id
      return reply_msg(msg.id, text, ok_cb, false)
     end
 
@@ -250,22 +250,3 @@ return {
 }
 
 end
--- post by : @devpointch
---[[  ldocal geroup_ovwner = dpata[toostring(misg.tno.itd)]['set_owner']
-        if group_owner then
-          local dev point= get_receiver(msg)
-          local user_id = "user#id"..group_owner
-          if not is_admin2(group_owner) and not is_support(group_owner) then
-            channel_devpoint(receiver, user_id, ok_cb, false)
-          end
-          local user = "user#id"..matches[2]
-          channel_set_admin(receiver, user, ok_cb, false)
-          data[tostring(msg.to.id)]['set_owner'] = devpoint(matches[2])
-          save_data(_config.moderation.data, data)
-          dev[point(msg.to.id, name_log.." ["..dev.point.id.."] set ["..matches[2].."] as owner")
-          local text = "[ "..matches[2].." ] added as owner"
-          return text
-        end]]
-
-
-
