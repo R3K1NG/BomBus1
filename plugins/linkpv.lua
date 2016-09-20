@@ -1,4 +1,15 @@
-
+--[[
+#
+#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#:((
+# For More Information ....! 
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
+# Version: 1.1
+#:))
+#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#
+]]
 do
 
 function run(msg, matches)
@@ -12,7 +23,7 @@ function run(msg, matches)
        end
          local text = "SuperGroup link  :\n"..group_link
           send_large_msg('user#id'..msg.from.id, text.."\n", ok_cb, false)
-           return "تم ارسال رابط المجموعة الى الخاص ✔"
+           return "link send to pv ✔"
 end
 
 return {
@@ -23,10 +34,3 @@ return {
 }
 
 end
-
---[[
-post by : @DevPointCH
-
-للمزيد من الشروحات والملفات اشترك في قناة @DevPointCH
-
-]]
