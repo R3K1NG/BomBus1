@@ -1,4 +1,25 @@
 #!/bin/bash
+# =====================================================================================================
+# Copyright (C) steady.sh v2.0 2016 iicc (@yagop)
+# =====================================================================================================
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+# this program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# =======================================================================================================
+# It depends on Tmux https://github.com/tmux/tmux which is BSD-licensed
+# and Screen https://www.gnu.org/software/screen GNU-licensed.
+# =======================================================================================================
+# This script is intended to control the state of a telegram-cli telegram bot running in background.
+# The idea is to get the bot fully operative all the time without any supervision by the user.
+# It should be able to recover the telegram bot in any case telegram-cli crashes, freezes or whatever.
+# This script works by tracing ctxt swithes value in kernel procces at a $RELOADTIME 
+# So it can detect any kind of kernel interruption with the procces and reload the bot.
+#
 
 # Some script variables
 OK=0
@@ -8,14 +29,15 @@ NONVOLUNTARYCHECK=0
 VOLUNTARY=1
 VOLUNTARYCHECK=0
 I=1
-BOT=DevPoint
-RELOADTIME=10
+BOT=devpoint  # You can put here other bots. Also you can change it to run more than one bot in the same server.
+RELOADTIME=5  # Time between checking cpu calls of the cli process. Set the value high if your bot does not receive lots of messages.
+
 
 function tmux_mode {
 
 sleep 0.5
 clear
-# Space invaders thanks to Amir
+# Space invaders thanks to github.com/windelicato
 f=3 b=4
 for j in f b; do
   for i in {0..7}; do
@@ -27,15 +49,20 @@ rst=$'\e[0m'
 
 cat << EOF
 
- $f1  @DevPointTeam     $f2 @DevPointTeam     $f3  @DevPointTeam   $f4  @DevPointTeam    $f5 @DevPointTeam    $f6 @DevPointTeam  $rst
-
+ $f1  ▀▄   ▄▀     $f2 ▄▄▄████▄▄▄    $f3  ▄██▄     $f4  ▀▄   ▄▀     $f5 ▄▄▄████▄▄▄    $f6  ▄██▄  $rst
+ $f1 ▄█▀███▀█▄    $f2███▀▀██▀▀███   $f3▄█▀██▀█▄   $f4 ▄█▀███▀█▄    $f5███▀▀██▀▀███   $f6▄█▀██▀█▄$rst
+ $f1█▀███████▀█   $f2▀▀███▀▀███▀▀   $f3▀█▀██▀█▀   $f4█▀███████▀█   $f5▀▀███▀▀███▀▀   $f6▀█▀██▀█▀$rst
+ $f1▀ ▀▄▄ ▄▄▀ ▀   $f2 ▀█▄ ▀▀ ▄█▀    $f3▀▄    ▄▀   $f4▀ ▀▄▄ ▄▄▀ ▀   $f5 ▀█▄ ▀▀ ▄█▀    $f6▀▄    ▄▀$rst
+ 
 EOF
-echo -e "                \e[100m                DevPoint script           \e[00;37;40m"
-echo -e "               \e[01;34m                 By Aziz                \e[00;37;40m"
+echo -e "                \e[100m                Steady script           \e[00;37;40m"
+echo -e "               \e[01;34m                    by yagop                 \e[00;37;40m"
 echo ""
 cat << EOF
- $bld$f1 @DevPointTeam   $f2 @DevPointTeam    $f3  @DevPointTeam    $f4 @DevPointTeam   $f5 @DevPointTeam    $f6  @DevPointTeam  $rst
-
+ $bld$f1▄ ▀▄   ▄▀ ▄   $f2 ▄▄▄████▄▄▄    $f3  ▄██▄     $f4▄ ▀▄   ▄▀ ▄   $f5 ▄▄▄████▄▄▄    $f6  ▄██▄  $rst
+ $bld$f1█▄█▀███▀█▄█   $f2███▀▀██▀▀███   $f3▄█▀██▀█▄   $f4█▄█▀███▀█▄█   $f5███▀▀██▀▀███   $f6▄█▀██▀█▄$rst
+ $bld$f1▀█████████▀   $f2▀▀▀██▀▀██▀▀▀   $f3▀▀█▀▀█▀▀   $f4▀█████████▀   $f5▀▀▀██▀▀██▀▀▀   $f6▀▀█▀▀█▀▀$rst
+ $bld$f1 ▄▀     ▀▄    $f2▄▄▀▀ ▀▀ ▀▀▄▄   $f3▄▀▄▀▀▄▀▄   $f4 ▄▀     ▀▄    $f5▄▄▀▀ ▀▀ ▀▀▄▄   $f6▄▀▄▀▀▄▀▄$rst
 
 EOF
 
@@ -44,7 +71,7 @@ sleep 1.2
 # Checking if the bot folder is in HOME
 echo -e "$bld$f4 CHECKING INSTALLED BOT...$rst"
 sleep 0.5
-ls ../ | grep $BOT 2>/dev/null
+ls ../ | grep $BOT > /dev/null
 if [ $? != 0 ]; then
   echo -e "$f1 ERROR: BOT: $BOT NOT FOUND IN YOUR HOME DIRECTORY$rst"
   sleep 4
@@ -55,11 +82,11 @@ sleep 0.5
 
 
 echo ""
-echo -e "\033[38;5;208m     > Channel : @DevPointTeam                         \033[0;00m"
-echo -e "\033[38;5;208m     > Developer : @TH3_GHOST                        \033[0;00m"
-echo -e "\033[38;5;208m     > Bot ID : @SuperDevPoint                         \033[0;00m"
-echo -e "\033[38;5;208m     > Github : GitHub.com/DevPointTeam/DevPoint      \033[0;00m"
-echo -e "\033[38;5;208m                                                   \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
 
 sleep 1.5
 echo -e "$bld$f4 CHECKING PROCESSES...$rst"
@@ -75,7 +102,7 @@ sleep 0.9
 # Opening new tmux in a daemon
 echo -e "$bld$f4 ATTACHING TMUX AS DAEMON...$rst"
 # It is recommended to clear cli status always before starting the bot
-rm ../.telegram-cli/state 2>/dev/null
+rm ../.telegram-cli/state  > /dev/null 
 # Nested TMUX sessions trick 
 TMUX= tmux new-session -d -s $BOT "./launch.sh"
 sleep 1.3
@@ -107,7 +134,7 @@ while true; do
 		if [ $I -ge 3 ]; then
 			kill $CLIPID
 			tmux kill-session -t $BOT
-			rm ../.telegram-cli/state 2>/dev/null
+			rm ../.telegram-cli/state  > /dev/null 
 			NONVOLUNTARY=0
 			NONVOLUNTARYCHECK=0
 			VOLUNTARY=0
@@ -128,7 +155,7 @@ while true; do
 		BAD=$(( $BAD + 1 ))
 		sleep 1
 		
-		rm ../.telegram-cli/state 2>/dev/null 
+		rm ../.telegram-cli/state  > /dev/null 
 
 		kill $CLIPID
 		tmux kill-session -t $BOT
@@ -162,7 +189,7 @@ function screen_mode {
 clear
 sleep 0.5
 
-# Space invaders thanks to github.com/mehdi-hs
+# Space invaders thanks to github.com/windelicato
 f=3 b=4
 for j in f b; do
   for i in {0..7}; do
@@ -173,15 +200,21 @@ bld=$'\e[1m'
 rst=$'\e[0m'
 
 cat << EOF
- $f1  @DevPointTeam     $f2 @DevPointTeam     $f3  @DevPointTeam   $f4  @DevPointTeam    $f5 @DevPointTeam    $f6 @DevPointTeam  $rst
 
+ $f1  ▀▄   ▄▀     $f2 ▄▄▄████▄▄▄    $f3  ▄██▄     $f4  ▀▄   ▄▀     $f5 ▄▄▄████▄▄▄    $f6  ▄██▄  $rst
+ $f1 ▄█▀███▀█▄    $f2███▀▀██▀▀███   $f3▄█▀██▀█▄   $f4 ▄█▀███▀█▄    $f5███▀▀██▀▀███   $f6▄█▀██▀█▄$rst
+ $f1█▀███████▀█   $f2▀▀███▀▀███▀▀   $f3▀█▀██▀█▀   $f4█▀███████▀█   $f5▀▀███▀▀███▀▀   $f6▀█▀██▀█▀$rst
+ $f1▀ ▀▄▄ ▄▄▀ ▀   $f2 ▀█▄ ▀▀ ▄█▀    $f3▀▄    ▄▀   $f4▀ ▀▄▄ ▄▄▀ ▀   $f5 ▀█▄ ▀▀ ▄█▀    $f6▀▄    ▄▀$rst
+ 
 EOF
-echo -e "                \e[100m                DevPoint script           \e[00;37;40m"
-echo -e "               \e[01;34m                 By Aziz                \e[00;37;40m"
+echo -e "                \e[100m                Steady script           \e[00;37;40m"
+echo -e "                \e[01;34m                    by yagop           \e[00;37;40m"
 echo ""
 cat << EOF
- $bld$f1 @DevPointTeam   $f2 @DevPointTeam    $f3  @DevPointTeam    $f4 @DevPointTeam   $f5 @DevPointTeam    $f6  @DevPointTeam  $rst
-
+ $bld$f1▄ ▀▄   ▄▀ ▄   $f2 ▄▄▄████▄▄▄    $f3  ▄██▄     $f4▄ ▀▄   ▄▀ ▄   $f5 ▄▄▄████▄▄▄    $f6  ▄██▄  $rst
+ $bld$f1█▄█▀███▀█▄█   $f2███▀▀██▀▀███   $f3▄█▀██▀█▄   $f4█▄█▀███▀█▄█   $f5███▀▀██▀▀███   $f6▄█▀██▀█▄$rst
+ $bld$f1▀█████████▀   $f2▀▀▀██▀▀██▀▀▀   $f3▀▀█▀▀█▀▀   $f4▀█████████▀   $f5▀▀▀██▀▀██▀▀▀   $f6▀▀█▀▀█▀▀$rst
+ $bld$f1 ▄▀     ▀▄    $f2▄▄▀▀ ▀▀ ▀▀▄▄   $f3▄▀▄▀▀▄▀▄   $f4 ▄▀     ▀▄    $f5▄▄▀▀ ▀▀ ▀▀▄▄   $f6▄▀▄▀▀▄▀▄$rst
 
 EOF
 
@@ -190,7 +223,7 @@ sleep 1.3
 # Checking if the bot folder is in HOME
 echo -e "$bld$f4 CHECKING INSTALLED BOT...$rst"
 sleep 0.5
-ls ../ | grep $BOT 2>/dev/null
+ls ../ | grep $BOT > /dev/null
 if [ $? != 0 ]; then
   echo -e "$f1 ERROR: BOT: $BOT NOT FOUND IN YOUR HOME DIRECTORY$rst"
   sleep 4
@@ -201,12 +234,11 @@ sleep 0.5
 
 
 echo ""
-echo -e "\033[38;5;208m     > Channel : @DevPointTeam                         \033[0;00m"
-echo -e "\033[38;5;208m     > Developer : @TH3_GHOST                        \033[0;00m"
-echo -e "\033[38;5;208m     > Bot ID : @SuperDevPoint                         \033[0;00m"
-echo -e "\033[38;5;208m     > Github : GitHub.com/DevPointTeam/DevPoint      \033[0;00m"
-echo -e "\033[38;5;208m                                                   \033[0;00m"
-
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
 # Starting preliminar setup
 sleep 1.5
 echo -e "$bld$f4 CHECKING PROCESSES...$rst"
@@ -249,7 +281,7 @@ done
 # I had some weird errors, so I had to do this silly fix:
 SCREENPID1=`cat SC1`
 SCREENPID2=`cat SC2`
-rm SC1 SC2 2>/dev/null
+rm SC1 SC2 >/dev/null
 
 sleep 0.7
 CLIPID=`ps -e | grep telegram-cli | sed 's/^[[:space:]]*//' | cut -f 1 -d" "`
@@ -275,7 +307,7 @@ sleep 1
 # Opening new screen in a daemon
 echo -e "$bld$f4 ATTACHING SCREEN AS DAEMON...$rst"
 # Better to clear cli status before
-rm ../.telegram-cli/state 2>/dev/null
+rm ../.telegram-cli/state  > /dev/null 
 screen -d -m bash launch.sh
 
 sleep 1.3
@@ -329,21 +361,11 @@ sleep 5
 	echo ""
 	
 	cat /proc/$CLIPID/task/$CLIPID/status > CHECK
-	if [ $? != 0 ]; then
-		I=$(( $I + 1 ))
-		if [ $I -ge 3 ]; then
-			rm ../.telegram-cli/state 2>/dev/null
-			NONVOLUNTARY=0
-			NONVOLUNTARYCHECK=0
-			VOLUNTARY=0
-			VOLUNTARYCHECK=0
-		fi
-	else
-		I=1
-	fi
 	VOLUNTARYCHECK=`grep voluntary CHECK | head -1 | cut -f 2 -d":" | sed 's/^[[:space:]]*//'`
 	NONVOLUNTARYCHECK=`grep nonvoluntary CHECK | cut -f 2 -d":" | sed 's/^[[:space:]]*//'`
-
+	#echo -e "NONVOLUNTARYCHECK CTXT SWITCHES: $NONVOLUNTARYCHECK"
+	#echo -e "NONVOLUNTARY CTXT SWITCHES: $NONVOLUNTARY"
+	
 	if [ $NONVOLUNTARY != $NONVOLUNTARYCHECK ] || [ $VOLUNTARY != $VOLUNTARYCHECK ]; then
 		echo -e "$f5 BOT RUNNING!$rst"
 		OK=$(( $OK + 1 ))
@@ -353,7 +375,7 @@ sleep 5
 		BAD=$(( $BAD + 1 ))
 		sleep 1
 		
-		rm ../.telegram-cli/state 2>/dev/null
+		rm ../.telegram-cli/state  > /dev/null 
 
 		kill $CLIPID
 		kill $SCREEN
@@ -402,7 +424,7 @@ echo "Bot running in the backgroud with TMUX"
 echo ""
 echo -e "\e[0m"
 sleep 3
-tmux kill-session script 2>/dev/null
+tmux kill-session script
 exit 1
 }
 
@@ -478,15 +500,15 @@ while getopts ":tsTSih" opt; do
 	i)
 	echo -e "\e[1m"
 	echo -e ""
-	echo "steady.sh bash script v1.2 iicc 2016 DBTeam" >&2
+	echo "steady.sh bash script c2.0 yagop 2016 BombusMOD" >&2
 	echo ""
 	echo -e "\e[0m"
-echo ""
-echo -e "\033[38;5;208m     > Channel : @DevPointTeam                         \033[0;00m"
-echo -e "\033[38;5;208m     > Developer : @TH3_GHOST                        \033[0;00m"
-echo -e "\033[38;5;208m     > Bot ID : @SuperDevPoint                         \033[0;00m"
-echo -e "\033[38;5;208m     > Github : GitHub.com/DevPointTeam/DevPoint      \033[0;00m"
-echo -e "\033[38;5;208m                                                   \033[0;00m"
+
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
+echo -e "\033[38;5;208m @BombusMOD    :)      @Ntflight \033[0;00m"
 echo ""
 	exit 1
       ;;
@@ -495,12 +517,12 @@ echo ""
 	echo -e ""
 	echo "Usage:"
 	echo -e ""
-	echo "devpoint.sh -t"
-	echo "devpoint.sh -s"
-	echo "devpoint.sh -T"
-	echo "devpoint.sh -S"
-	echo "devpoint.sh -h"
-	echo "devpoint.sh -i"
+	echo "steady.sh -t"
+	echo "steady.sh -s"
+	echo "steady.sh -T"
+	echo "steady.sh -S"
+	echo "steady.sh -h"
+	echo "steady.sh -i"
     echo ""
 	echo "Options:"
 	echo ""
@@ -528,3 +550,4 @@ echo ""
       ;;
   esac
 done
+
