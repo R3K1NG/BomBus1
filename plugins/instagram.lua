@@ -3,8 +3,8 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -84,7 +84,7 @@ local function instagramMedia(msg, query)
 		  text = text.."Name: "..jdat.data.user.full_name.."\n"
 		  text = text.."Like Count: "..jdat.data.likes.count.."\n"
 	end
-	text = text.."\n@GPMod"
+	text = text.."\n@BombusMOD"
 	send_msg(receiver,text,ok_cb,false)
 end
 local function run(msg, matches)
