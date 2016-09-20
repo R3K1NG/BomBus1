@@ -1,15 +1,3 @@
---[[
-#
-#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#:((
-# For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
-# Version: 1.1
-#:))
-#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#
-]]
 do
 
 local function pre_process(msg)
@@ -18,7 +6,7 @@ local function pre_process(msg)
     local hash = 'mate:'..msg.to.id
     if redis:get(hash) and msg.fwd_from and not is_sudo(msg) and not is_owner(msg) and not is_momod(msg) and not is_admin1(msg)  then
             delete_msg(msg.id, ok_cb, true)
-            send_large_msg(get_receiver(msg), 'عزيزي '..msg.from.first_name..'\nممنوع عمل اعادة توجيه من القنوات هنا التزم بقوانين المجموعة 👋👮\n#username @'..msg.from.username)
+            send_large_msg(get_receiver(msg), 'yagop'..msg.from.first_name..'\nلطفا فوروارد نکن ازجایی ممنون  👋👮\n#username @'..msg.from.username)
             return "done"
         end
     
@@ -28,7 +16,7 @@ local function pre_process(msg)
   
 
 
-local function DevPoint(msg, matches)
+local function BombusMOD(msg, matches)
     chat_id =  msg.to.id
     
     if is_momod(msg) and matches[1] == 'lock' then
@@ -50,7 +38,7 @@ return {
         '^[/!#](lock) fwd$',
         '^[/!#](unlock) fwd$'
     },
-    run = DevPoint,
+    run = BombusMOD,
     pre_process = pre_process
 }
 end
