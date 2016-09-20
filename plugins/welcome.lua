@@ -3,14 +3,14 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #
 ]]
-local function DevPoint(msg, matches, callback, extra)
+local function yagop(msg, matches, callback, extra)
 
 local data = load_data(_config.moderation.data)
 
@@ -41,7 +41,7 @@ data[tostring(msg.to.id)]['group_welcome'] = matches[2]..'\n\nGroup Rules :\n'..
 end
 if not is_owner(msg) then 
     return 'For Owners Only!'
-end--DevPointCH
+end--Ntflight
 
 if matches[1] and is_owner(msg) then
     
@@ -52,7 +52,7 @@ data[tostring(msg.to.id)]['group_welcome'] = matches[1]
 end
 if not is_owner(msg) then 
     return 'For Owners Only!'
-end--@DevPointCH
+end--@Ntflight
 
 
     
@@ -63,6 +63,6 @@ return {
   "^[!#/]setwlc +(.*)$",
   "^[!#/](delwlc)$"
   },
-  run = DevPoint
+  run = yagop
 }
---post by channel @DevPointCH
+--post by channel @Ntflight
