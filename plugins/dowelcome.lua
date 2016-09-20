@@ -3,16 +3,14 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #
 ]]
-
-
-local function DevPoint(msg, matches, callback, extra)
+local function yagop(msg, matches, callback, extra)
 
 local data = load_data(_config.moderation.data)
 
@@ -21,7 +19,7 @@ local group_welcome = data[tostring(msg.to.id)]['group_welcome']
 if matches[1] == 'chat_add_user' or 'chat_add_user_link' then --For Normal Group
     if not msg.service then 
         return nil 
-    else--@DevPointCH
+    else--@Ntflight
 if string.match(group_welcome, '{gpname}') then group_welcome = string.gsub(group_welcome, '{gpname}', ""..string.gsub(msg.to.print_name, "_", " ").."")
  end
 if string.match(group_welcome, '{firstname}') then group_welcome = string.gsub(group_welcome, '{firstname}', ""..(msg.action.user.first_name or '').."")
@@ -47,7 +45,6 @@ return {
   "^!!tgservice (chat_add_user)$",
   "^!!tgservice (chat_add_user_link)$",
   },
-  run = DevPoint,
+  run = yagop,
   pre_process = pre_process
 }
---post by channel @DevPointCH
