@@ -3,8 +3,8 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -16,9 +16,9 @@ local function DevPoint(msg, matches)
   jstr, res = https.request(url)
   jdat = JSON.decode(jstr)
   if jdat.message then
-    return 'تم اختصار الرابط 🆕✔️ \n___________\n\n'..jdat.message
+    return 'انجام شد 🆕✔️ \n___________\n\n'..jdat.message
   else
-    return "تم اختصار الرابط 🆕✔️: \n___________\n"..jdat.data.url
+    return "انجام شد 🆕✔️: \n___________\n"..jdat.data.url
     end
   end
 
@@ -29,4 +29,4 @@ return {
   run = DevPoint,
 }
 
---post by : channel : @DevPointCH
+--post by : channel : @Ntflight
