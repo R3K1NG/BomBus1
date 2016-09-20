@@ -3,8 +3,8 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -12,51 +12,51 @@
 ]]
 do
 
-local function run(msg, matches)
+local function yagop(msg, matches)
 if is_momod(msg) and matches[1]== "list1" then
 return [[
-🔹اوامر ادارة المجموعات 🔹
+🔹مجموعه دستورات 🔹
 ____________________
-/who : قائمة الاعضاء | 👥
-/info : معلومات العضو | 📃
-/gpinfo : معلومات الكروب | 💢
-/settings : الاعدادات | ⚙
-/me : موقعك في المجموعة | 🏌
+/who : مشخصات اعضا گروه | 👥
+/info : مشخصات شخص | 📃
+/gpinfo : مشخصات گروه | 💢
+/settings : تنظیمات | ⚙
+/me : توضیحات من | 🏌
 ____________________
-/Promote : رفع ادمن | ➕
-/demote : تنزيل ادمن | ✖️
-/setadmin : رفع اداري | 🔝
-/demoteadmin : تنزيل اداري | 🔙
-/admins : قائمة الادمنية | 👥
+/Promote : منیجرکردن | ➕
+/demote :  برکنارکردن منیجر  | ✖️
+/setadmin : ادمین کردن | 🔝
+/demoteadmin : برکنارکردن ادمین | 🔙
+/admins : ادمین ها | 👥
 ____________________
-/link : رابط الكروب | 🔗
-/setlink : وضع رابط | 📌
-/linkpv : الرابط خاص | 📩
-/newlink : رابط جديد | 🆕
+/link : لینک | 🔗
+/setlink : گذاشتن لینک | 📌
+/linkpv : فرستادن لینک در خاص | 📩
+/newlink : لینک جدید | 🆕
 ____________________
-/block + لمنع كلمة معينة : كلمة | ✖️
-/unblock + السماح بالكلمة : كلمة ✔️
-/blocks word : قائمة الكلمات | 💭
-/clean blocks word : مسح الكلمات |🔰
+/block + قفل کردن : كلمة | ✖️
+/unblock + بازکردن : كلمة ✔️
+/blocks word : فیلترکردن | 💭
+/clean blocks word : حذف کلمات فیلتر |🔰
 ____________________
-/setrules + وضع قوانين : القوانين | ⚙
-/rules : رؤية القوانين : 👁
-/setabout + وضع وصف : الوصف | 🔧
-/setname + وضع اسم : اسم | 🎫
-/setwlc + وضع الترحيب : الترحيب |🚏
-/setbye + وضع التوديع : التوديع | 💭
-/setphoto : وضع صوره | 🎡
+/setrules + گذاشتن قوانين : قوانين | ⚙
+/rules : دیدن قوانین : 👁
+/setabout + گذاشتن توضیحات : توضیخات | 🔧
+/setname + گذاشتن اسم : اسم | 🎫
+/setwlc + گذاشتن خوش آمد: خوش آمد |🚏
+/setbye + گذاشتن خداحافظی : خداحافظی | 💭
+/setphoto : گذاشتن عکس | 🎡
 ____________________
 /clean ↴ حذف ⛔️
-rules :  القوانين | 🎌
-about : الوصف | 📃
-modlist : الادمنية | 👥
-muteuser : المكتومين | 🗣
-wlc : رسالة الترحيب | 📝
-bye : رسالة الخروج | 🖐
-username : المعرف | @
+rules :  قوانین | 🎌
+about : توضیحات | 📃
+modlist : منیجر ربات درگروه | 👥
+muteuser : سایلنت کاربر | 🗣
+wlc : خوش آمد | 📝
+bye : خداحافظی | 🖐
+username : نام کاربری | @
 ____________________
-Channel : @DevPointCH 🎗
+Channel : @NTFLIGHT 🎗
 
 ]]
 end
@@ -72,6 +72,6 @@ usage = "Help list",
 patterns = {
 "[#!/](list1)"
 },
-run = run 
+run = yagop 
 }
 end
