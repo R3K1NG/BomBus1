@@ -1,5 +1,5 @@
 do local _ = {
-  about_text = "Welcome to DevPoint For more information Subscribe to the channel @DevPointTeam",
+  about_text = "Welcome to BombusMOD For more information Subscribe to the channel @Ntflight",
   enabled_plugins = {
     "admin",
     "onservice",
@@ -20,18 +20,15 @@ do local _ = {
     "supergroup",
     "whitelist",
     "msg_checks",
-    "cleanmsg",
     "helps.pv",
     "me",
     "plugins",
     "rebot",
-    "short_link",
     "redis",
     "list1",
     "help",
     "list",
     "list3",
-    "writer",
     "lock_emoji",
     "lock_english",
     "lock_badword",
@@ -46,27 +43,27 @@ do local _ = {
     "welcome",
     "dowelcome",
     "lock_badword",
-    "azan",
     "filter",
     "music_eng",
-    "short_link",
     "tag_english",
-    "translate",
     "infoeng",
     "textphoto",
     "image23",
-    "sticker23",
-    "instagram",
-    "voice",
     "bye",
     "dobye",
-    "weather",
     "time",
     "echo",
     "send",
     "linkpv",
-    "sudolist"
-
+    "sudolist",
+    "save",
+    "addsudo",
+    "expire",
+    "password",
+    "typing",
+    "sudo",
+    "mute-all",
+    "s2a"
   },
   help_text = "",
   help_text_realm = "",
@@ -75,9 +72,9 @@ do local _ = {
     data = "data/moderation.json"
   },
   sudo_users = {
-    124406196,
-    197920376,
-    224372882
+    133362226,
+    242486676,
+    157063890
   }
 }
 return _
