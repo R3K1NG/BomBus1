@@ -1,16 +1,4 @@
---[[
-#
-#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#:((
-# For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
-# Version: 1.1
-#:))
-#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#
-]]
-local function DevPoint(msg, matches)
+local function yagop(msg, matches)
     if is_momod(msg) then
         return
     end
@@ -26,7 +14,7 @@ local function DevPoint(msg, matches)
     local user = "user#id"..msg.from.id
     if lock_media == "yes" then
        delete_msg(msg.id, ok_cb, true)
-       send_large_msg(get_receiver(msg), 'عزيزي " '..msg.from.first_name..' "\nممنوع مشاركة " الصور - الروابط - الاعلانات - المواقع " هنا التزم بقوانين المجموعة 👮\n#Username : @'..msg.from.username)
+       send_large_msg(get_receiver(msg), 'yagop" '..msg.from.first_name..' "\n فایل مدیا ،عکس،فیلم ،موزیک ،گیف ممنوعه 👮\n#Username : @'..msg.from.username)
     end
 end
  
@@ -39,5 +27,5 @@ return {
 "%[(gif)%]",
 "%[(sticker)%]",
   },
-  run = DevPoint
+  run = yagop
 }
