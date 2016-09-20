@@ -3,8 +3,8 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -61,7 +61,7 @@ function get_staticmap(area)
 end
 
 
-function DevPoint(msg, matches)
+function yagop(msg, matches)
 	local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
 	redis:incr(hash)
 	local receiver	= get_receiver(msg)
@@ -82,7 +82,7 @@ function DevPoint(msg, matches)
 	  text = text..'\n🕌الغروب: '..data.Sunset
 	  text = text..'\n🕌آذان المغرب: '..data.Maghrib
 	  text = text..'\n🕌آذان العشاء : '..data.Isha
-	  text = text..'\n\nchannel : @DevPointCH'
+	  text = text..'\n\nchannel : @Ntflight'
 	if string.match(text, '0') then text = string.gsub(text, '0', '0') end
 	if string.match(text, '1') then text = string.gsub(text, '1', '1') end
 	if string.match(text, '2') then text = string.gsub(text, '2', '2') end
@@ -99,6 +99,5 @@ end
 return {
     patterns = {"^[/!]azan (.*)$","^[/!](azan)$"},   
 
-    run =DevPoint }
+    run =yagop }
 end
---post by : channel : @DevPointCH
