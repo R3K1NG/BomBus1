@@ -1,17 +1,5 @@
---[[
-#
-#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#:((
-# For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
-# Version: 1.1
-#:))
-#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#
-]]
 do
-local function DevPoint(msg,matches)
+local function yagop(msg,matches)
 if is_momod(msg) and matches[1]== 'pv' and matches[2]== 'help' then
       local help_text = tostring(_config.help_text_super)
             send_large_msg("user#id"..msg.from.id, help_text)
@@ -25,5 +13,5 @@ end
 end
 return {
 patterns ={"^[!/#](pv) (help)$"},
-run = DevPoint }
+run = yagop }
 end
