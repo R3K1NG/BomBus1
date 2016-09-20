@@ -1,4 +1,16 @@
-local function run(msg, matches, callback, extra)
+--[[
+#
+#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#:((
+# For More Information ....! 
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
+# Version: 1.1
+#:))
+#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#
+]]
+local function yagop(msg, matches, callback, extra)
 
 local data = load_data(_config.moderation.data)
 
@@ -50,5 +62,5 @@ return {
   "^[!#/]setbye +(.*)$",
   "^[!#/](delbye)$"
   },
-  run = run
+  run = yagop
 }
