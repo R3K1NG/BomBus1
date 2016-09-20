@@ -1,4 +1,16 @@
-local function run(msg, matches, callback, extra)
+--[[
+#
+#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#:((
+# For More Information ....! 
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
+# Version: 1.1
+#:))
+#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+#
+]]
+local function yagop(msg, matches, callback, extra)
 
 local data = load_data(_config.moderation.data)
 
@@ -16,6 +28,6 @@ return {
   patterns = {
   "^!!tgservice (chat_del_user)$"
   },
-  run = run,
+  run = yagop,
   pre_process = pre_process
 }
