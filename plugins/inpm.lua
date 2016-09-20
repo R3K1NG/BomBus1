@@ -1,4 +1,4 @@
-﻿local function pre_process(msg)
+local function pre_process(msg)
 local to = msg.to.type
 local service = msg.service
 	if to == 'user' and msg.fwd_from then
@@ -207,8 +207,8 @@ if to == 'user' or service or is_admin1(msg) and to == "chat" or to == "channel"
 	end
 
 	if matches[1] == 'help' and msg.to.type == 'user' or matches[1] == 'pmhelp' and is_admin1(msg) and msg.to.type ~= 'user' then
-      	savelog(msg.to.id, name_log.." ["..msg.from.id.."] used pm help")
-      	text = "مرحباً بك في DEV POINT ! \n للمزيد من المعلومات قم بالاشتراك في القناة \n  Channel : @DevPointTeam"
+      	savelog(msg.to.id, name_log.." ["..msg.from.id.."] used pm .help")
+      	text = " bot  bmbusmod ! \n    see    \n  Channel : @Ntflight"
      	return text
     end
 
