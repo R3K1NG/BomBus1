@@ -3,8 +3,8 @@
 #ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 #:((
 # For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
+# Developer : reza < @Yagop > 
+# our channel: @Ntflight
 # Version: 1.1
 #:))
 #ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -13,7 +13,7 @@
 local function addword(msg, name)
     local hash = 'chat:'..msg.to.id..':badword'
     redis:hset(hash, name, 'newword')
-    return "تم منع هذه الكلمة في المجموعة 📌📫\n>"..name
+    return "این کلمه فیلتر شده درگروه 📌📫\n>"..name
 end
 
 local function get_variables_hash(msg)
@@ -27,7 +27,7 @@ local function list_variablesbad(msg)
 
   if hash then
     local names = redis:hkeys(hash)
-    local text = 'قائمة الكلمات المحظورة 🚫🌀 :\n\n'
+    local text = 'لیستی از کلمات ممنوع 🚫🌀 :\n\n'
     for i=1, #names do
       text = text..'> '..names[i]..'\n'
     end
@@ -41,7 +41,7 @@ function clear_commandbad(msg, var_name)
   --Save on redis  
   local hash = get_variables_hash(msg)
   redis:del(hash, var_name)
-  return 'تم مسح الكلمات الممنوعة 🏌⛳️'
+  return 'کلمات ممنوع پاکسازی شده است 🏌⛳️'
 end
 
 local function list_variables2(msg, value)
@@ -79,13 +79,13 @@ function clear_commandsbad(msg, cmd_name)
   --Save on redis  
   local hash = get_variables_hash(msg)
   redis:hdel(hash, cmd_name)
-  return ''..cmd_name..'  تم السماح بالكلمة 🦁🎋'
+  return ''..cmd_name..'  کلمه مجاز شد 🦁🎋'
 end
 
-local function run(msg, matches)
+local function yagop(msg, matches)
   if matches[2] == 'block' then
   if not is_momod(msg) then
-   return 'للمدراء والادمنية فقط Ⓜ️💡'
+   return 'فقط مدیران و ادمینها Ⓜ️💡'
   end
   local name = string.sub(matches[3], 1, 50)
 
@@ -118,6 +118,6 @@ return {
 "^(.+)$",
 	   
   },
-  run = run
+  run = yagop
 }
 
