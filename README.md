@@ -26,7 +26,7 @@ login yagop
 ```
 cd $HOME
 ```
-git clone https://github.com/goblinor/BomBus1.git
+git clone https://github.com/R3K1NG/BomBus1
 ```
 cd BomBus1
 ```
